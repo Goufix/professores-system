@@ -11,7 +11,7 @@ export function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link>Home</Nav.Link>
-            <Nav.Link>Desafio</Nav.Link>
+            <Nav.Link disabled>Em breve</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
