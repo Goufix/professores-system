@@ -2,6 +2,8 @@ import React from "react";
 import { useTabletop } from "../../hooks/useTableTop";
 import { Loading } from "../Loading";
 import { SheetRow } from "../../@types/sheet";
+import { ApplicatorCard } from "../ApplicatorCard";
+import { Row, Col } from "react-bootstrap";
 
 const key: string = "1twPVj98sPGt9AeaDXsMqjc413yIgJ4RWaV_7O5RgpFg";
 
@@ -15,15 +17,18 @@ export function Home() {
 
   return (
     <>
-      {applicator.map(applicator => {
-        return sheetData
-          .filter(value => value.NICK === applicator)
-          .map(value => (
-            <p>
-              {applicator}: {value.ALUNO}
-            </p>
-          ));
-      })}
+      <Row>
+        {applicator.map(applicator => {
+          return (
+            <Col sm={4}>
+              <ApplicatorCard
+                lessons={sheetData.filter(lesson => lesson.NICK === applicator)}
+                applicator={applicator}
+              />
+            </Col>
+          );
+        })}
+      </Row>
     </>
   );
 }
