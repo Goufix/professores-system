@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, ProgressBar } from "react-bootstrap";
 import { SheetRow } from "../../@types/sheet";
 import { Header } from "./styles";
 
@@ -16,10 +16,24 @@ export function ApplicatorCard(props: Props) {
   const applicatorCAG = props.lessons.filter(
     v => v.CURSO_APLICADO === "[CAG] Curso de Aperfeiçoamento Gramatical"
   ).length;
+
+  const goal = 5;
+  const achievedGoal = applicatorCAG + (applicatorCRO / goal) * 100;
+
   return (
-    <Card style={{ marginBottom: "5px", marginLeft: "5px" }}>
-      <Header>{props.applicator}</Header>
-      <Card.Body>
+    <Card
+      style={{
+        marginBottom: "5px",
+        marginLeft: "5px",
+        fontWeight: "bold"
+      }}
+      text="light"
+    >
+      <Header text="light" style={{ backgroundColor: "#4920a8" }}>
+        {props.applicator}
+      </Header>
+      <ProgressBar animated variant="success" now={achievedGoal}></ProgressBar>
+      <Card.Body style={{ backgroundColor: "#7b3ff2" }}>
         <div>Aulas aplicadas: {applicatorLessons}</div>
         <div>CRO: {applicatorCRO}</div>
         <div>CAG: {applicatorCAG}</div>
