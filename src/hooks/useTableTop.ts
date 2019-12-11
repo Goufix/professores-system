@@ -8,13 +8,10 @@ export function useTabletop<T = any>(key: String) {
     tabletop.init({
       key,
       callback: (data: T[]) => {
-        console.log(data);
         setSheetData(data);
       },
       simpleSheet: true
     });
   }, [key]);
-  console.log(sheetData);
-  console.log(key);
   return sheetData;
 }

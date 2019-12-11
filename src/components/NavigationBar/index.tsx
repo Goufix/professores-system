@@ -10,7 +10,7 @@ export function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link>Home</Nav.Link>
+            <Nav.Link style={{ color: "#fff" }}>Home</Nav.Link>
             <Nav.Link disabled>Em breve</Nav.Link>
           </Nav>
         </Navbar.Collapse>

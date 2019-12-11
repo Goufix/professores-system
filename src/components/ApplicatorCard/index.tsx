@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, ProgressBar } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import { SheetRow } from "../../@types/sheet";
-import { Header } from "./styles";
+import { Header, CustomListGroup, CustomProgressBar } from "./styles";
 
 interface Props {
   lessons: SheetRow[];
@@ -9,6 +9,7 @@ interface Props {
 }
 
 export function ApplicatorCard(props: Props) {
+  const habboImage = `https://www.habbo.com.br/habbo-imaging/avatarimage?&user=${props.applicator}&action=std&direction=2&head_direction=4&img_format=png&gesture=std&headonly=1&size=b`;
   const applicatorLessons = props.lessons.length;
   const applicatorCRO = props.lessons.filter(
     v => v.CURSO_APLICADO === "[CRO] Curso de Revisão Ortográfica"
@@ -25,25 +26,34 @@ export function ApplicatorCard(props: Props) {
       style={{
         marginBottom: "5px",
         marginLeft: "5px",
-        fontWeight: "bold"
+        backgroundColor: "#413c69",
+        color: "#fff"
       }}
-      text="light"
     >
-      <Header text="light" style={{ backgroundColor: "#4920a8" }}>
+      <Header
+        text="light"
+        style={{ backgroundColor: "#413c69", fontWeight: "bold" }}
+      >
         {props.applicator}
+        <img src={habboImage} alt="" />
       </Header>
-      <ProgressBar
+      <CustomProgressBar
         animated
-        variant="success"
         now={achievedGoal}
-        style={{ backgroundColor: "#7b3ff2" }}
+        style={{ backgroundColor: "#413c69" }}
         label={achievedGoal + "%"}
-      ></ProgressBar>
-      <Card.Body style={{ backgroundColor: "#7b3ff2" }}>
-        <div>Aulas aplicadas: {applicatorLessons}</div>
-        <div>CRO: {applicatorCRO}</div>
-        <div>CAG: {applicatorCAG}</div>
-      </Card.Body>
+      ></CustomProgressBar>
+      <CustomListGroup>
+        <ListGroup.Item>
+          <b>Curso de Rrevisão Ortográfica:</b> {applicatorCRO}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Curso de Aperfeiçoamento Gramatical:</b> {applicatorCAG}
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <b>Aulas aplicadas:</b> {applicatorLessons}
+        </ListGroup.Item>
+      </CustomListGroup>
     </Card>
   );
 }
