@@ -18,7 +18,7 @@ export function ApplicatorCard(props: Props) {
   ).length;
 
   const goal = 5;
-  const achievedGoal = applicatorCAG + (applicatorCRO / goal) * 100;
+  const achievedGoal = ((applicatorCAG + applicatorCRO) / goal) * 100;
 
   return (
     <Card
@@ -32,7 +32,13 @@ export function ApplicatorCard(props: Props) {
       <Header text="light" style={{ backgroundColor: "#4920a8" }}>
         {props.applicator}
       </Header>
-      <ProgressBar animated variant="success" now={achievedGoal}></ProgressBar>
+      <ProgressBar
+        animated
+        variant="success"
+        now={achievedGoal}
+        style={{ backgroundColor: "#7b3ff2" }}
+        label={achievedGoal + "%"}
+      ></ProgressBar>
       <Card.Body style={{ backgroundColor: "#7b3ff2" }}>
         <div>Aulas aplicadas: {applicatorLessons}</div>
         <div>CRO: {applicatorCRO}</div>
