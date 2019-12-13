@@ -1,12 +1,15 @@
 import React from "react";
 import { Home } from "./components/Home";
 import { NavigationBar } from "./components/NavigationBar";
+import { Container } from "react-bootstrap";
 
 export function App() {
   return (
     <>
-      <NavigationBar />
-      <Home />
+      <Container>
+        <NavigationBar />
+        <Home />
+      </Container>
     </>
   );
 }
