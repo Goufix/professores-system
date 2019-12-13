@@ -45,13 +45,13 @@ export function ApplicatorCard(props: Props) {
       ></CustomProgressBar>
       <CustomListGroup>
         <ListGroup.Item>
-          <b>Curso de Rrevisão Ortográfica:</b> {applicatorCRO}
+          Curso de Rrevisão Ortográfica: {applicatorCRO}
         </ListGroup.Item>
         <ListGroup.Item>
-          <b>Curso de Aperfeiçoamento Gramatical:</b> {applicatorCAG}
+          Curso de Aperfeiçoamento Gramatical: {applicatorCAG}
         </ListGroup.Item>
-        <ListGroup.Item>
-          <b>Aulas aplicadas:</b> {applicatorLessons}
+        <ListGroup.Item style={{ fontWeight: "bold" }}>
+          Aulas aplicadas: {applicatorLessons}
         </ListGroup.Item>
       </CustomListGroup>
     </Card>

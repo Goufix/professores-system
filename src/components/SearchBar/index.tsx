@@ -10,6 +10,7 @@ export function SearchBar(props: Props) {
     <Form>
       <Form.Group controlId="search">
         <Form.Control
+          autoComplete="off"
           onChange={props.handleChange}
           type="text"
           placeholder="Pesquisar professor"
