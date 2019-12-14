@@ -2,12 +2,12 @@ import React from "react";
 import { Form } from "react-bootstrap";
 
 interface Props {
-  handleChange: (e: any) => void;
+  handleChange: (e: React.FormEvent<HTMLSelectElement>) => void;
 }
 
 export function SearchBar(props: Props) {
   return (
-    <Form>
+    <Form onSubmit={(event: React.FormEvent) => event.preventDefault()}>
       <Form.Group controlId="search">
         <Form.Control
           autoComplete="off"

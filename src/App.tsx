@@ -1,14 +1,19 @@
 import React from "react";
-import { Home } from "./components/Home";
+import { Home } from "./pages/Home";
 import { NavigationBar } from "./components/NavigationBar";
 import { Container } from "react-bootstrap";
+import { Router } from "@reach/router";
+import { GoalMaker } from "./pages/GoalMaker";
 
 export function App() {
   return (
     <>
       <Container>
         <NavigationBar />
-        <Home />
+        <Router>
+          <Home path="/" />
+          <GoalMaker path="/goal-maker" />
+        </Router>
       </Container>
     </>
   );

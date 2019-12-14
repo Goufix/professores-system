@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useTabletop } from "../../hooks/useTableTop";
-import { Loading } from "../Loading";
+import { Loading } from "../../components/Loading";
 import { SheetRow } from "../../@types/sheet";
-import { ApplicatorCard } from "../ApplicatorCard";
+import { ApplicatorCard } from "../../components/ApplicatorCard";
 import { Row, Col } from "react-bootstrap";
-import { SearchBar } from "../SearchBar";
+import { SearchBar } from "../../components/SearchBar";
+import { RouteComponentProps } from "@reach/router";
 
 const key: string = "1twPVj98sPGt9AeaDXsMqjc413yIgJ4RWaV_7O5RgpFg";
 
-export function Home() {
+export function Home(_: RouteComponentProps) {
   const sheetData: SheetRow[] = useTabletop(key).map(sheetRow => {
     const NICK = sheetRow.NICK.replace(`'=`, "=");
     return { ...sheetRow, NICK };
@@ -27,7 +28,7 @@ export function Home() {
 
   return (
     <>
-      <SearchBar handleChange={e => setFilterNick(e.target.value)} />
+      <SearchBar handleChange={e => setFilterNick(e.currentTarget.value)} />
       <Row>
         {filteredApplicators.map(applicator => {
           return (
