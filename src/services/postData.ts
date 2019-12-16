@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_GOOGLE_SCRIPT_POST_URL!;
 
 interface SuccessResponse {
   result: "success";
-  nextRow: number;
+  row: number;
 }
 
 interface ErrorResponse {
@@ -15,14 +15,16 @@ interface ErrorResponse {
 export async function postData(
   data: SheetRow
 ): Promise<SuccessResponse | ErrorResponse> {
-  const url = new URL(API_URL);
+  const body = new FormData();
 
-  Object.entries(data).forEach(([name, value]) =>
-    url.searchParams.append(name, value)
-  );
+  Object.entries(data).forEach(([name, value]) => body.append(name, value));
 
-  const resp = await fetch(url.toString());
+  const resp = await fetch(API_URL, { method: "POST", body });
   const json = await resp.json();
 
   return json;
 }
+
+(async () => {
+  const result = await postData({} as any);
+})();

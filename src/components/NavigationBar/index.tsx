@@ -14,8 +14,8 @@ export function NavigationBar() {
             <Nav.Link to="/" style={{ color: "#fff" }} as={Link}>
               Home
             </Nav.Link>
-            <Nav.Link to="/goal-maker" as={Link}>
-              Em breve
+            <Nav.Link to="/goal-maker" style={{ color: "#fff" }} as={Link}>
+              Contar meta
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

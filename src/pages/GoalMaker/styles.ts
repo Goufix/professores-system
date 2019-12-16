@@ -6,10 +6,9 @@ export const Header = styled(Card.Header)`
   justify-content: space-between;
   align-items: center;
 `;
+//    ${props => (props.esseNomeNaoPodeDarErroAssim ? "#28bd34" : "#bd2828")};
 
 export const FormControl = styled(Form.Control)`
-  margin: 0 5px;
-  border: 3px solid #f444;
   outline: none;
   resize: none;
   border-radius: 5px;

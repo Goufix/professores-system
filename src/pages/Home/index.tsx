@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import { useTabletop } from "../../hooks/useTableTop";
 import { Loading } from "../../components/Loading";
-import { SheetRow } from "../../@types/sheet";
 import { ApplicatorCard } from "../../components/ApplicatorCard";
 import { Row, Col } from "react-bootstrap";
 import { SearchBar } from "../../components/SearchBar";
 import { RouteComponentProps } from "@reach/router";
-
-const key: string = "1twPVj98sPGt9AeaDXsMqjc413yIgJ4RWaV_7O5RgpFg";
+import { useSheetDataContext } from "../../context/SheetDataContext";
+import { useTabletop } from "../../hooks/useTableTop";
 
 export function Home(_: RouteComponentProps) {
-  const sheetData: SheetRow[] = useTabletop(key).map(sheetRow => {
-    const NICK = sheetRow.NICK.replace(`'=`, "=");
-    return { ...sheetRow, NICK };
-  });
+  const { sheetData } = useSheetDataContext();
 
   const [filterNick, setFilterNick] = useState("");
 
@@ -21,6 +16,7 @@ export function Home(_: RouteComponentProps) {
   const filteredApplicators = applicators.filter(value =>
     value.includes(filterNick)
   );
+  useTabletop(process.env.REACT_APP_SHEET_KEY!);
 
   if (sheetData.length === 0) {
     return <Loading />;
