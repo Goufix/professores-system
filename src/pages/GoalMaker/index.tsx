@@ -26,19 +26,18 @@ export function GoalMaker(_: RouteComponentProps) {
       )
     ];
     applicators.map(applicator => {
-      sheetData
+      return sheetData
         .filter(lesson => lesson.NICK === applicator)
 
-        .map((_value, _index, array) => {
+        .map((value, _index, array) => {
           if (array.length === 0) {
             if (getNicksFromMemberList(formData[1]).includes(applicator)) {
-              goal.push(
-                `${applicator} - [b][color=#ccc]02 aulas aplicadas[/color] {Licença} [/b]`
-              );
+              goal.push(`${applicator} - [b][color=#ccc]02 aulas aplicadas[/color] {Licença} [/b]`);
             }
             if (getNicksFromMemberList(formData[0]).includes(applicator)) {
             }
           }
+          return value;
         });
     });
   }
