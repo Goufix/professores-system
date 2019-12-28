@@ -13,9 +13,7 @@ export function Home(_: RouteComponentProps) {
   const [filterNick, setFilterNick] = useState("");
 
   const applicators = [...new Set(sheetData.map(value => value.NICK))];
-  const filteredApplicators = applicators.filter(value =>
-    value.includes(filterNick)
-  );
+  const filteredApplicators = applicators.filter(value => value.includes(filterNick));
   useTabletop(process.env.REACT_APP_SHEET_KEY!);
 
   if (sheetData.length === 0) {

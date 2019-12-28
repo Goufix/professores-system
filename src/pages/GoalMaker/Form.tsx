@@ -59,11 +59,7 @@ export function Form(props: Props) {
               </BsForm.Group>
             </Col>
           </Row>
-          <Button
-            type="submit"
-            variant="primary"
-            style={{ backgroundColor: "#413c69" }}
-          >
+          <Button type="submit" variant="primary" style={{ backgroundColor: "#413c69" }}>
             Contar meta
           </Button>
         </Card>

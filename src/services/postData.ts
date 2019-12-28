@@ -12,9 +12,7 @@ interface ErrorResponse {
   error: any;
 }
 
-export async function postData(
-  data: SheetRow
-): Promise<SuccessResponse | ErrorResponse> {
+export async function postData(data: SheetRow): Promise<SuccessResponse | ErrorResponse> {
   const body = new FormData();
 
   Object.entries(data).forEach(([name, value]) => body.append(name, value));

@@ -30,10 +30,7 @@ export function ApplicatorCard(props: Props) {
         color: "#fff"
       }}
     >
-      <Header
-        text="light"
-        style={{ backgroundColor: "#413c69", fontWeight: "bold" }}
-      >
+      <Header text="light" style={{ backgroundColor: "#413c69", fontWeight: "bold" }}>
         {props.applicator}
         <img src={habboImage} alt="" />
       </Header>
@@ -44,12 +41,8 @@ export function ApplicatorCard(props: Props) {
         label={achievedGoal + "%"}
       ></CustomProgressBar>
       <CustomListGroup>
-        <ListGroup.Item>
-          Curso de Rrevisão Ortográfica: {applicatorCRO}
-        </ListGroup.Item>
-        <ListGroup.Item>
-          Curso de Aperfeiçoamento Gramatical: {applicatorCAG}
-        </ListGroup.Item>
+        <ListGroup.Item>Curso de Rrevisão Ortográfica: {applicatorCRO}</ListGroup.Item>
+        <ListGroup.Item>Curso de Aperfeiçoamento Gramatical: {applicatorCAG}</ListGroup.Item>
         <ListGroup.Item style={{ fontWeight: "bold" }}>
           Aulas aplicadas: {applicatorLessons}
         </ListGroup.Item>

@@ -36,9 +36,7 @@ export function useSheetDataContext() {
   const context = useContext(SheetDataContext);
 
   if (typeof context === "undefined") {
-    throw new Error(
-      "You must use `useSheetDataContext` within an `SheetDataContextProvider`."
-    );
+    throw new Error("You must use `useSheetDataContext` within an `SheetDataContextProvider`.");
   }
 
   return context;
