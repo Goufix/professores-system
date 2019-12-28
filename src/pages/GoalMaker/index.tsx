@@ -28,6 +28,7 @@ export function GoalMaker(_: RouteComponentProps) {
     applicators.map(applicator => {
       sheetData
         .filter(lesson => lesson.NICK === applicator)
+
         .map((_value, _index, array) => {
           if (array.length === 0) {
             if (getNicksFromMemberList(formData[1]).includes(applicator)) {
