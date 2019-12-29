@@ -5,7 +5,6 @@ export function getNicksFromMemberList(memberList: string): string[] {
       return value.indexOf("Ocupada") !== 15;
     })
     .map(value => {
-      // It should get only the member
       return value
         .substring(value.toLowerCase().indexOf("professor(a): "), value.indexOf(" -"))
         .toLowerCase()
@@ -19,7 +18,12 @@ export function getJoinDate(memberList: string) {
     .split("\n")
     .filter(value => {
       return (
-        value.indexOf("Ocupada") !== 15 && value.trim().toLowerCase() !== "professor(a):" // It should remove empty info of the list
+        value.indexOf("Ocupada") !== 15 &&
+        value.trim().toLowerCase() !== "professor(a):" &&
+        value
+          .trim()
+          .toLowerCase()
+          .startsWith("professor(a)")
       );
     })
     .map(value => {

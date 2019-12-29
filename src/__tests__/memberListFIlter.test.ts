@@ -7,7 +7,11 @@ Professor(a): Sinistrando - 04 Dez 2019 [GRA.I] {G.DCP}
 Professor(a): rodr1guess - 05 Dez 2019 [GRA.I]
 Professor(a): .Explanado. - 07 Dez 2019 [GRA.I]
 Professor(a):
-Professor(a):`;
+Professor(a):
+daskjdghdkhasjlkdsa
+
+
+`;
 
 test("It should return only the username", () => {
   expect(getNicksFromMemberList(memberList)).toStrictEqual([

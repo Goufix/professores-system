@@ -1,14 +1,23 @@
 import React, { useState } from "react";
-import { RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, globalHistory } from "@reach/router";
 import { Form } from "./Form";
 import { useSheetDataContext } from "../../context/SheetDataContext";
 import { useTabletop } from "../../hooks/useTableTop";
 import { Loading } from "../../components/Loading";
 import { getNicksFromMemberList } from "../../utils/memberListFilter";
+import { SheetRow } from "../../@types/sheet";
+
+interface Goal {
+  name: string;
+  points: number;
+  type: "Great" | "Good" | "Warning" | "Free";
+}
 
 export function GoalMaker(_: RouteComponentProps) {
   const [formData, setFormData] = useState<string[]>([]);
+  const [goal, setGoal] = useState<Goal[]>([]);
   const { sheetData } = useSheetDataContext();
+  const [activeApplicators, inactiveApplicators] = formData;
   useTabletop(process.env.REACT_APP_SHEET_KEY!);
 
   if (sheetData.length === 0) {
@@ -16,7 +25,6 @@ export function GoalMaker(_: RouteComponentProps) {
   }
 
   if (formData.length !== 0) {
-    let goal = [];
     const applicators = [
       ...new Set(
         sheetData
@@ -25,26 +33,63 @@ export function GoalMaker(_: RouteComponentProps) {
           .concat(getNicksFromMemberList(formData[1]))
       )
     ];
-    applicators.map(applicator => {
-      return sheetData
-        .filter(lesson => lesson.NICK === applicator)
 
-        .map((value, _index, array) => {
-          if (array.length === 0) {
-            if (getNicksFromMemberList(formData[1]).includes(applicator)) {
-              goal.push(`${applicator} - [b][color=#ccc]02 aulas aplicadas[/color] {Licença} [/b]`);
-            }
-            if (getNicksFromMemberList(formData[0]).includes(applicator)) {
-            }
+    applicators.map(applicator => {
+      const applicatorLessons = sheetData.filter(lesson => lesson.NICK === applicator);
+      return applicatorLessons.forEach((value, _index, array) => {
+        if (array.length === 0) {
+          // Se o professor não tiver aplicado nenhuma aula e estiver de licença
+          // Colocar ele na lista de professores em licença
+          if (getNicksFromMemberList(inactiveApplicators).includes(applicator)) {
+            setGoal([
+              ...goal,
+              {
+                name: applicator,
+                points: applicatorLessons.length,
+                type: "Free"
+              }
+            ]);
           }
-          return value;
-        });
+          // Se o professor não tiver aplicado nenhuma aula e estiver ativo,
+          // Colocar ele na lista de "EM AVISO"
+          if (getNicksFromMemberList(activeApplicators).includes(applicator)) {
+            setGoal([
+              ...goal,
+              {
+                name: applicator,
+                points: applicatorLessons.length,
+                type: "Warning"
+              }
+            ]);
+          }
+        } else if (array.length > 14) {
+          /// Se o professor tiver aplicado mais de 14 aulas,
+          // colocar ele na lista de destaques.
+          setGoal([
+            ...goal,
+            {
+              name: applicator,
+              points: applicatorLessons.length,
+              type: "Great"
+            }
+          ]);
+        } else {
+          setGoal([
+            ...goal,
+            {
+              name: applicator,
+              points: applicatorLessons.length,
+              type: "Good"
+            }
+          ]);
+        }
+      });
     });
   }
 
   return (
     <>
-      <h1>{formData}</h1>
+      <h1>{goal.map(value => `${value.name}: ${value.points} - ${value.type}`)}</h1>
       <Form onSubmit={data => setFormData(data)} />
     </>
   );
