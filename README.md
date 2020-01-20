@@ -1,3 +1,7 @@
-### Criador:
+# 🏬 Oi Sale System
 
-Goufix
+Shows informations about the classes applied by _RCC/Prof_ teachers and another util informations
+
+## 📖 Other Information
+
+Created by [Álifer de Medeiros Quevedo](https://github.com/Goufix).
