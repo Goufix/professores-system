@@ -1,4 +1,4 @@
-# 🏬 Oi Sale System
+# 👩🏻‍🏫 RCC - Professores System
 
 Shows informations about the classes applied by _RCC/Prof_ teachers and another util informations
 
