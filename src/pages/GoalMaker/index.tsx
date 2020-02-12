@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { RouteComponentProps, globalHistory } from "@reach/router";
+import { RouteComponentProps } from "@reach/router";
 import { Form } from "./Form";
 import { useSheetDataContext } from "../../context/SheetDataContext";
 import { useTabletop } from "../../hooks/useTableTop";
 import { Loading } from "../../components/Loading";
 import { getNicksFromMemberList } from "../../utils/memberListFilter";
-import { SheetRow } from "../../@types/sheet";
 
 interface Goal {
   name: string;
@@ -29,18 +28,22 @@ export function GoalMaker(_: RouteComponentProps) {
       ...new Set(
         sheetData
           .map(data => data.NICK)
-          .concat(getNicksFromMemberList(formData[0]))
-          .concat(getNicksFromMemberList(formData[1]))
+          .concat(getNicksFromMemberList(activeApplicators))
+          .concat(getNicksFromMemberList(inactiveApplicators))
       )
     ];
 
     applicators.map(applicator => {
-      const applicatorLessons = sheetData.filter(lesson => lesson.NICK === applicator);
+      const applicatorLessons = sheetData.filter(
+        lesson => lesson.NICK === applicator
+      );
       return applicatorLessons.forEach((value, _index, array) => {
         if (array.length === 0) {
           // Se o professor não tiver aplicado nenhuma aula e estiver de licença
           // Colocar ele na lista de professores em licença
-          if (getNicksFromMemberList(inactiveApplicators).includes(applicator)) {
+          if (
+            getNicksFromMemberList(inactiveApplicators).includes(applicator)
+          ) {
             setGoal([
               ...goal,
               {
@@ -89,7 +92,9 @@ export function GoalMaker(_: RouteComponentProps) {
 
   return (
     <>
-      <h1>{goal.map(value => `${value.name}: ${value.points} - ${value.type}`)}</h1>
+      <h1>
+        {goal.map(value => `${value.name}: ${value.points} - ${value.type}`)}
+      </h1>
       <Form onSubmit={data => setFormData(data)} />
     </>
   );
